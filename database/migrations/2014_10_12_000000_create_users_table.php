@@ -16,8 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone_number')->unique();
-            $table->string('date_of_birth');
+            $table->date('date_of_birth');
             $table->string('gender');
+            $table->text('address');
+            $table->enum('role', ['Admin', 'Employee']);
+            $table->enum('status', ['Active', 'Inactive']);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

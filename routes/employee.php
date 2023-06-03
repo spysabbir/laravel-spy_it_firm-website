@@ -1,12 +1,10 @@
 <?php
 
-use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Backend\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Backend\Auth\NewPasswordController;
-use App\Http\Controllers\Backend\Auth\PasswordController;
 use App\Http\Controllers\Backend\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Backend\Auth\RegisteredUserController;
+use App\Http\Controllers\Backend\Employee\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -23,18 +21,15 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])->name('password.confirm');
-    Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
-
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [EmployeeController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('password', [ProfileController::class, 'update'])->name('password.update');
 
 });
 
