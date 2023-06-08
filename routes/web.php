@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +19,6 @@ Route::get('/', [FrontendController::class, 'index'])->name('index');
 
 require __DIR__.'/admin.php';
 require __DIR__.'/employee.php';
+
+Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
